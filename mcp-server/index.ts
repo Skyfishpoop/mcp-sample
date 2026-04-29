@@ -4,6 +4,12 @@ import { z } from "zod";
 
 const API_BASE = "http://localhost:3000";
 
+type Book = {
+  id: number;
+  title: string;
+  author: string;
+};
+
 const server = new McpServer({
   name: "books-api",
   version: "1.0.0",
@@ -16,7 +22,7 @@ server.registerTool(
   },
   async () => {
     const res = await fetch(`${API_BASE}/books`);
-    const data = await res.json();
+    const data = (await res.json()) as Book[];
     return {
       content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
     };
@@ -38,7 +44,7 @@ server.registerTool(
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, author: author ?? "" }),
     });
-    const data = await res.json();
+    const data = (await res.json()) as Book;
     return {
       content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
     };

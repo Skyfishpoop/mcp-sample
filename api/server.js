@@ -19,7 +19,7 @@ app.get("/books/:id", (req, res) => {
 
 app.post("/books", (req, res) => {
   const newBook = {
-    id: books.length + 1,
+    id: Math.max(0, ...books.map((b) => b.id)) + 1,
     title: req.body.title,
     author: req.body.author,
   };

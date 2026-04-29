@@ -141,3 +141,6 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Local design notes (記事に書く内容のドラフト・非公開メモ)
+docs/
